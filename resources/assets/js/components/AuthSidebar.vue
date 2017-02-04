@@ -108,23 +108,13 @@
         },
         methods: {
             sidebarLogin() {
-                /*
-                this.$http.post('/api/authenticate', this.login).then((response) => {
-                    //alert(JSON.stringify(response.body, null, 4));
-                    localStorage.setItem('token', response.body.token)
-                    this.user.authenticated = true
-                }, (response) => {
-                    //console.log(JSON.stringify(response, null, 4));
-                    alert(response.body.error);
-                });
-                */
-                this.$http.post('/api/login', this.login).then((response) => {
+                axios.post('/api/login', this.login).then((response) => {
                     // alert(JSON.stringify(response.body.SUCCESS, null, 4));
                     if (response.body.SUCCESS) {
                         localStorage.setItem('token', response.body.TOKEN)
                         Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 
-                        this.$http.get('/api/user').then((response) => {
+                        axios.get('/api/user').then((response) => {
                             this.$root.user = response.body;
                         });
                     }
@@ -134,7 +124,7 @@
                 });
             },
             sidebarRegister() {
-                this.$http.post('/api/register', this.register).then((response) => {
+                axios.post('/api/register', this.register).then((response) => {
                     // success callback
                     alert('success');
                     console.log(response);
@@ -144,7 +134,7 @@
                 });
             },
             sidebarLogout() {
-                this.$http.post('/api/logout', this.login).then((response) => {
+                axios.post('/api/logout', this.login).then((response) => {
                     if (response.body.SUCCESS) {
                         this.$root.user = []
                         localStorage.removeItem('token')
@@ -191,7 +181,7 @@
 
                     //show_whirl();
 
-                    this.$http.post(
+                    axios.post(
                         '/smarty-site/api/v1/fblogin', 
                         {'accessToken': accessToken})
                     .then((response) => {
