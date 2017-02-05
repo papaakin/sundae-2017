@@ -11,7 +11,7 @@
                         <button class="btn btn-primary btn-icon-only show-side-left hidden-md-up"><i class="icon-hamberger"></i></button>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav hidden-sm-down flex-row">
+                <ul class="nav navbar-nav hidden-sm-down flex-row" v-cloak>
                     <li class="nav-item dropdown hidden-xs">
                         <button class="btn btn-secondary dropdown-toggle" id="create-dropdown" data-toggle="dropdown" aria-expanded="false"><i class="icon-plus"></i> Create</button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="create-dropdown">
@@ -22,12 +22,18 @@
                         <button class="btn btn-secondary btn-icon-only" href="#"><i class="icon-search"></i></button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-secondary btn-icon-only show-side-right"><i class="icon-member"></i></button>
+                        <button v-if="!(user.user_id > 0)" class="btn btn-secondary btn-icon-only show-side-right"><i class="icon-member"></i></button>
+                        <button v-if="(user.user_id > 0)" class="btn btn-secondary btn-icon-only show-side-right p-0">
+                            <img :src="'http://s.jeban.com/userfiles/thumbs/members/50x50/' + user.user_id + '.jpg'" class="img-responsive rounded-circle" width="34">
+                        </button>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav hidden-md-up">
+                <ul class="nav navbar-nav hidden-md-up" v-cloak>
                     <li class="nav-item">
-                        <button class="btn btn-secondary btn-icon-only show-side-right"><i class="icon-member"></i></button>
+                        <button v-if="!(user.user_id > 0)" class="btn btn-secondary btn-icon-only show-side-right"><i class="icon-member"></i></button>
+                        <button v-if="(user.user_id > 0)" class="btn btn-secondary btn-icon-only show-side-right p-0">
+                            <img :src="'http://s.jeban.com/userfiles/thumbs/members/50x50/' + user.user_id + '.jpg'" class="img-responsive rounded-circle" width="34">
+                        </button>
                     </li>
                 </ul>
             </nav>

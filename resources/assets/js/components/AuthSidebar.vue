@@ -1,6 +1,6 @@
 <template>
      <div class="auth-sidebar p-3">
-        <div class="login-social-sidebar" v-if="!user.id && !is_register">
+        <div class="login-social-sidebar" v-if="!(user.user_id > 0) && !is_register">
             <h5 class="Heavent_med">สมัครสมาชิก เพื่อเป็นสาวซันเด</h5>
             <p class="control">
                 <button class="btn btn-secondary btn-block" @click="sidebarFbLogin">
@@ -18,13 +18,13 @@
             </p>
         </div>
 
-        <hr v-if="!user.id && !is_register">
+        <hr v-if="!(user.user_id > 0) && !is_register">
 
-        <div class="login-form-sidebar" v-if="!user.id && !is_register">
+        <div class="login-form-sidebar" v-if="!(user.user_id > 0) && !is_register">
             <h5 class="Heavent_med">เป็นสาวซันเด/จีบันอยู่แล้ว เข้าสู่ระบบ</h5>
 
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="อีเมล" v-model="login.email">
+                    <input type="text" class="form-control" placeholder="ล็อกอิน" v-model="login.username">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="รหัสผ่าน" v-model="login.password">
@@ -33,7 +33,7 @@
             <a class="btn btn-link btn-block" href="javascript:;">ลืมรหัสผ่าน</a>
         </div>
 
-        <div class="register-form-sidebar" v-if="!user.id && is_register">
+        <div class="register-form-sidebar" v-if="!(user.user_id > 0) && is_register">
             <h5 class="Heavent_med">สมัครสมาชิกด้วยอีเมล</h5>
 
             <div class="form-group">
@@ -52,17 +52,17 @@
             <a class="btn btn-link btn-block" href="javascript:;" @click="is_register = false">กลับไปหน้าล็อกอิน</a>
         </div>
 
-        <ul v-if="user.id" class="action-list nav">
+        <ul v-if="(user.user_id > 0)" class="action-list nav flex-column">
             <li class="nav-item">
                 <a class="collapsed" data-toggle="collapse" href="#aside-right-nav-create" aria-expanded="true" aria-controls="aside-right-nav-create">
                     <span class="icon home"></span><span>+ Create</span>
                 </a>
-                <ul class="action-list nav collapse in" id="aside-right-nav-create" aria-expanded="true">
+                <ul class="action-list nav collapse in flex-column" id="aside-right-nav-create" aria-expanded="true">
                     <li class="nav-item"><a href="#"><i class="icon-write"></i><span>Create Topic</span></a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="#"><i class="icon-search"></i><span>Search</span></a></li>
-            <li class="nav-item"><a href="#"><i class="icon-user"></i><span>My Page</span></a></li>
+            <li class="nav-item"><a href="#"><i class="icon-member"></i><span>My Page</span></a></li>
             <li class="nav-item hl-item"><a href="#" @click="sidebarLogout"><span>Log Out</span></a></li>
         </ul>
     </div>
@@ -85,6 +85,9 @@
                 });
             };
             */
+
+            console.log(user);
+
             (function(d, s, id){
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) {return;}
@@ -97,30 +100,26 @@
         data () {
             return {
                 is_register: false,
-                login: { username: '', password: '', remember: true},
+                login: { username: '', password: '', remember: false},
                 register: { username: '', email: '', password: ''},
                 // user: user
-                // User object will let us check authentication status
-                // user: {
-                //    authenticated: false
-                // },
             }
         },
         methods: {
             sidebarLogin() {
                 axios.post('/api/login', this.login).then((response) => {
-                    // alert(JSON.stringify(response.body.SUCCESS, null, 4));
-                    if (response.body.SUCCESS) {
-                        localStorage.setItem('token', response.body.TOKEN)
-                        Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+                    console.log(response.data);
+                    if (response.data.SUCCESS) {
+                        console.log(response.data.TOKEN);
+                        localStorage.setItem('token', response.data.TOKEN)
+                        window.axios.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem('token');
 
                         axios.get('/api/user').then((response) => {
-                            this.$root.user = response.body;
+                            this.$root.user = response.data;
                         });
                     }
-                }, (response) => {
-                    //console.log(JSON.stringify(response, null, 4));
-                    alert(response.body.ERROR);
+                }).catch((error) => {
+                    alert('ล็อกอินหรือรหัสผ่านไม่ถูกต้อง ลองอีกทีนะจ๊ะ')
                 });
             },
             sidebarRegister() {
@@ -128,29 +127,21 @@
                     // success callback
                     alert('success');
                     console.log(response);
-                }, (response) => {
+                }).catch((response) => {
                     // error callback
                     console.log(response.error.message);
                 });
             },
             sidebarLogout() {
                 axios.post('/api/logout', this.login).then((response) => {
-                    if (response.body.SUCCESS) {
+                    if (response.data.SUCCESS) {
                         this.$root.user = []
                         localStorage.removeItem('token')
                     }
-                }, (response) => {
+                }).catch((response) => {
                     //console.log(JSON.stringify(response, null, 4));
-                    alert(response.body.ERROR);
+                    alert(response.data.ERROR);
                 });
-            },
-            sidebarCheckAuth() {
-                var jwt = localStorage.getItem('token')
-                if(jwt) {
-                    this.user.authenticated = true
-                } else {
-                    this.user.authenticated = false      
-                }
             },
 
             sidebarFbLogin() {
@@ -185,10 +176,10 @@
                         '/smarty-site/api/v1/fblogin', 
                         {'accessToken': accessToken})
                     .then((response) => {
-                        // alert(JSON.stringify(response.body.SUCCESS, null, 4));
-                        // localStorage.setItem('token', response.body.token)
+                        // alert(JSON.stringify(response.data.SUCCESS, null, 4));
+                        // localStorage.setItem('token', response.data.token)
                         console.log(response);
-                    }, (response) => {
+                    }).catch((response) => {
                         //console.log(JSON.stringify(response, null, 4));
                         console.log(response);
                     });

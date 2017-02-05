@@ -27,6 +27,9 @@ body > .container-fluid {
 	background: #F5F8FC;
 }
 
+[v-cloak] {
+	visibility: hidden;
+}
 /* Main */
 
 .main {
@@ -178,3 +181,195 @@ main footer:before {
 	} 
 }
 
+/* http://sundae.jeban.com/images/nav-sprite-menu.png */
+.card.menu-list,
+.card.menu-list .card-header,
+.card.menu-list .card-block {
+    border: none;
+    border-radius: none;
+    background-color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-list li,
+.action-list li,
+.card.menu-list .card-header {
+    background: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #E7E7E7;
+    padding: 0;
+}
+.menu-list li a,
+.action-list li a,
+.card.menu-list .card-header a {
+	display: block;
+	padding: 10px 15px;
+	font-family: 'Heavent_reg';
+	font-size: 24px;
+	text-decoration: none;
+	color: #000000;
+}
+.menu-list li:hover,
+.menu-list li:hover a,
+.card.menu-list .card-header.nav-item:hover a {
+	background-color: #D7E2F2;
+}
+.action-list li:hover,
+.action-list li:hover a {
+    background-color: #F6E490!important;
+}
+.menu-list li:hover a,
+.menu-list li.active a,
+.action-list li:hover a,
+.action-list li.active a,
+.card.menu-list .card-header:hover a,
+.card.menu-list .card-header.active a {
+	color: inherit;
+}
+.menu-list li a .icon,
+.card.menu-list .card-header a .icon {
+	background-image: url("../images/nav-sprite-menu-min.png");
+	background-size: 440px auto;
+	background-repeat: no-repeat;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 0 auto;
+	margin-right: 15px;
+	vertical-align: middle;
+}
+.menu-list li a .icon.beauty,
+.card.menu-list .card-header a .icon.beauty {
+    background-position: 0px 0px;
+}
+.menu-list li a .icon.fashion,
+.card.menu-list .card-header a .icon.fashion {
+    background-position: -40px 0px;
+}
+.menu-list li a .icon.lifestyle,
+.card.menu-list .card-header a .icon.lifestyle {
+    background-position: -80px 0px;
+}
+.menu-list li a .icon.clinic {
+    background-position: -121px 0px;
+}
+.menu-list li a .icon.special {
+    background-position: -158px 0px;
+}
+.menu-list li a .icon.idol {
+    background-position: -198px 0px;
+}
+.menu-list li a .icon.board {
+    background-position: -238px 0px;
+}
+.menu-list li a .icon.review {
+    background-position: -280px 0px;
+}
+.menu-list li a .icon.check {
+    background-position: -313px 0px;
+}
+.menu-list li a .icon.home {
+    background-position: -353px 0px;
+}
+.menu-list li a .icon.event {
+    background-position: -397px 0px;
+}
+.menu-list li:hover a .icon.beauty,
+.menu-list li.active a .icon.beauty {
+    background-position: 0px -40px;
+}
+.menu-list li:hover a .icon.fashion,
+.menu-list li.active a .icon.fashion {
+    background-position: -40px -40px;
+}
+.menu-list li:hover a .icon.lifestyle,
+.menu-list li.active a .icon.lifestyle {
+    background-position: -80px -40px;
+}
+.menu-list li:hover a .icon.clinic,
+.menu-list li.active a .icon.clinic {
+    background-position: -121px -40px;
+}
+.menu-list li:hover a .icon.special,
+.menu-list li.active a .icon.special {
+    background-position: -158px -40px;
+}
+.menu-list li:hover a .icon.idol,
+.menu-list li.active a .icon.idol {
+    background-position: -198px -40px;
+}
+.menu-list li:hover a .icon.board,
+.menu-list li.active a .icon.board {
+    background-position: -238px -40px;
+}
+.menu-list li:hover a .icon.review,
+.menu-list li.active a .icon.review {
+    background-position: -280px -40px;
+}
+.menu-list li:hover a .icon.check,
+.menu-list li.active a .icon.check {
+    background-position: -313px -40px;
+}
+.menu-list li:hover a .icon.home,
+.menu-list li.active a .icon.home {
+    background-position: -353px -40px;
+}
+.menu-list li:hover a .icon.event,
+.menu-list li.active a .icon.event {
+    background-position: -397px -40px;
+}
+
+.menu-list .menu-list li:last-child {
+    border: none;
+}
+.menu-list .menu-list li {
+    padding: 5px 15px 5px 40px;
+    background-image: url("../images/favicon-96x96.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-color: #FFFFFF;
+}
+.menu-list .menu-list li a {
+    background: transparent;
+    color: #E7546C;
+    font-size: 22px;
+    padding: 0;
+}
+.menu-list .menu-list li a:hover {
+    text-decoration: underline;
+}
+
+.action-list li a i[class*="icon-"] {
+    color: #707070;
+    font-size: 15px;
+    margin-right: 15px;
+}
+.action-list li a[data-toggle="collapse"] {
+    font-family: 'Heavent_med';
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 0 15px;
+    background: #F6E490;
+    color: #000000;
+}
+.action-list {
+    margin-top: 25px;
+    line-height: 1.2;
+}
+.action-list .action-list {
+    margin-top: 0;
+}
+.action-list .action-list li:last-child {
+    border: none;
+}
+.action-list .action-list li,
+.action-list .action-list li a {
+    background-color: #F7EECD;
+}
+.action-list li.hl-item a {
+    color: #E7546C;
+    text-align: center;
+}

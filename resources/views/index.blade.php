@@ -9,6 +9,8 @@
 	@else
 		{{ Auth::user()->name }}
 	@endif
+
+	<pre>@{{ user }}</pre>
 	{{--
 	<p>
 		<button class="btn btn-default" id="show-comment-list" @click="showCommentList = true">Show Comments</button>

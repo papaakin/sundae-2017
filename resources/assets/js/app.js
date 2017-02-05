@@ -29,3 +29,5 @@ const app = new Vue({
 
     }
 });
+
+console.log(window.user);

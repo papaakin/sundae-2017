@@ -7,13 +7,13 @@
                     </li>
                 </ul>
             </nav>
-            <ul class="menu-list nav">
+            <ul class="menu-list nav flex-column">
 				<li class="nav-item"><a href="#"><span class="icon home"></span><span>Home</span></a></li>
             </ul>
             
             <div id="accordion" role="tablist" aria-multiselectable="true">
 
-                <div class="card menu-list nav">
+                <div class="card menu-list nav flex-column">
                     <div class="card-header nav-item" role="tab" id="headingOne">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <span class="icon beauty"></span><span>Beauty</span>
@@ -22,7 +22,7 @@
 
                     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                         <div class="card-block">
-                            <ul class="menu-list nav" id="aside-left-nav-beauty" aria-labelledby="h-aside-left-nav-beauty">
+                            <ul class="menu-list nav flex-column" id="aside-left-nav-beauty" aria-labelledby="h-aside-left-nav-beauty">
                                 <li class="nav-item"><a href="#"><span>All About Beauty</span></a></li>
                                 <li class="nav-item"><a href="#"><span>ฮาวทูทำสวย</span></a></li>
                                 <li class="nav-item"><a href="#"><span>ได้ของมาเห่อ</span></a></li>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="card menu-list nav">
+                <div class="card menu-list nav flex-column">
                     <div class="card-header nav-item" role="tab" id="headingTwo">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <span class="icon fashion"></span><span>Fashion</span>
@@ -42,7 +42,7 @@
                     </div>
                     <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="card-block">
-                            <ul class="menu-list nav" id="aside-left-nav-fashion" aria-labelledby="h-aside-left-nav-fashion">
+                            <ul class="menu-list nav flex-column" id="aside-left-nav-fashion" aria-labelledby="h-aside-left-nav-fashion">
                                 <li class="nav-item"><a href="#"><span>All About Fashion</span></a></li>
                                 <li class="nav-item"><a href="#"><span>แต่งตัว</span></a></li>
                                 <li class="nav-item"><a href="#"><span>แต่งผม</span></a></li>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="card menu-list nav">
+                <div class="card menu-list nav flex-column">
                     <div class="card-header nav-item" role="tab" id="headingThree">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <span class="icon lifestyle"></span><span>Lifestyle</span>
@@ -60,7 +60,7 @@
                     </div>
                     <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
                         <div class="card-block">
-                            <ul class="menu-list nav" id="aside-left-nav-lifestyle" aria-labelledby="h-aside-left-nav-lifestyle">
+                            <ul class="menu-list nav flex-column" id="aside-left-nav-lifestyle" aria-labelledby="h-aside-left-nav-lifestyle">
                                 <li class="nav-item"><a href="#"><span>All About Lifestyle</span></a></li>
                                 <li class="nav-item"><a href="#"><span>เที่ยวที่ไหนดี</span></a></li>
                                 <li class="nav-item"><a href="#"><span>กินอะไรดี</span></a></li>
@@ -75,7 +75,7 @@
 
             </div>
 
-            <ul class="menu-list nav">
+            <ul class="menu-list nav flex-column">
 				<li class="nav-item"><a href="#"><span class="icon event"></span><span>Events</span></a></li>
 				<li class="nav-item"><a href="#"><span class="icon special"></span><span>Sundae Special</span></a></li>
 				<li class="nav-item"><a href="#"><span class="icon idol"></span><span>Sundae Idol's</span></a></li>
@@ -90,9 +90,9 @@
                     <li class="text-right">
                         <button class="btn btn-primary btn-icon-only hide-side-right"><i class="icon-close"></i></button>
                     </li>
-                    <li v-if="!user.id"><h2 class="Heavent_reg">ยินดีต้อนรับ</h2></li>
-                    <li v-if="user.id"><h2 class="Heavent_reg">สวัสดีค่ะ</h2></li>
-                    <li v-if="user.id"><h3 class="Heavent_reg">คุณ @{{user.name}}</h3></li>
+                    <li v-if="!(user.user_id > 0)"><h2 class="Heavent_reg">ยินดีต้อนรับ</h2></li>
+                    <li v-if="(user.user_id > 0)"><h2 class="Heavent_reg">สวัสดีค่ะ</h2></li>
+                    <li v-if="(user.user_id > 0)"><h3 class="Heavent_reg">คุณ @{{user.username}}</h3></li>
                 </ul>
             </nav>
             <auth-sidebar :user.sync="user"></auth-sidebar>
